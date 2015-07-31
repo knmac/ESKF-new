@@ -1,0 +1,13 @@
+function [R] = Angle2RotMatYXZ(Y,X,Z)
+   R1=[cos(Y)*cos(Z) + sin(Y)*sin(X)*sin(Z), ...
+       cos(Z)*sin(Y)*sin(X) - cos(Y)*sin(Z), ...
+       cos(X)*sin(Y)];
+   
+   R2 =[cos(X)*sin(Z), cos(X)*cos(Z), -sin(X)];
+   
+   R3 = [cos(Y)*sin(X)*sin(Z) - cos(Z)*sin(Y), ...
+         cos(Y)*cos(Z)*sin(X) + sin(Y)*sin(Z), ...
+         cos(Y)*cos(X)];
+     
+   R=[R1;R2;R3];
+end
