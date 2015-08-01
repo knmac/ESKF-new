@@ -1,7 +1,7 @@
 - To combine parts of a file in Windows
 copy /b file1 + file2 + file3 + file4 filetogether
-e.g. copy /b Data7.tar.gz.part-aa + Data7.tar.gz.part-ab Data7.tar.gz
+e.g. copy /b Data13.tar.gz.part_00 + Data13.tar.gz.part_01 + Data13.tar.gz.part_02 + Data13.tar.gz.part_03 Data7.tar.gz
 
 - To combine parts of a file in Linux
 cat fileprefix* > filetogether
-e.g. cat Data7.tar.gz.part-* > Data7.tar.gz
+e.g. cat Data13.tar.gz.part_* > Data13.tar.gz
