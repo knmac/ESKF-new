@@ -237,7 +237,7 @@ while ixIMU < nbIMU && ixIMG < nbIMG
         fig = figure(2); hold on;
         plot3(x_I(1), x_I(3), x_I(2), '.b');
         set(gca,'ZDir','Reverse')
-        xlabel('X');ylabel('Z');zlabel('Y');
+        xlabel('X-axis (m)');ylabel('Z-axis (m)');zlabel('Y-axis (m)');
         xlim([-10,10]);ylim([-10,10]);zlim([-10,10]);
         dcm_obj = datacursormode(fig);
         set(dcm_obj,'UpdateFcn',@myupdatefcn)

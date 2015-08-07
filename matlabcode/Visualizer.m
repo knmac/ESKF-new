@@ -1,4 +1,6 @@
+close all;
 DRAW_CORR = 0;
+NATURAL_VIEW = 1;
 
 %% visualize result
 fprintf('Plotting results...\n');
@@ -12,13 +14,25 @@ g = all_states(17:19,:);
 corr_idx_idx = find(correct_mark);
 
 % plot position------------------------------------------------------------
-figure;hold on;
-plot3(p(1,:), p(2,:), p(3,:), '-');
-if DRAW_CORR
-    plot3(p(1,correct_mark>0), p(2,correct_mark>0), p(3,correct_mark>0), 'or');
+fig=figure;hold on;
+if NATURAL_VIEW
+    plot3(p(1,:), p(3,:), p(2,:), '-');
+    if DRAW_CORR
+        plot3(p(1,correct_mark>0), p(3,correct_mark>0), p(2,correct_mark>0), 'or');
+    end
+    view(3);
+    set(gca,'ZDir','Reverse');
+    xlabel('X-axis (m)');ylabel('Z-axis (m)');zlabel('Y-axis (m)');
+    dcm_obj = datacursormode(fig);
+    set(dcm_obj,'UpdateFcn',@myupdatefcn);
+else
+    plot3(p(1,:), p(2,:), p(3,:), '-');
+    if DRAW_CORR
+        plot3(p(1,correct_mark>0), p(2,correct_mark>0), p(3,correct_mark>0), 'or');
+    end
+    view(3);
+    xlabel('X-axis (m)');ylabel('Y-axis (m)');zlabel('Z-axis (m)');
 end
-view(3);
-xlabel('X-axis (m)');ylabel('Y-axis (m)');zlabel('Z-axis (m)');
 title('Position');
 grid on; box on;rotate3d on;
 daspect([1 1 1]);
