@@ -30,9 +30,15 @@ end
 
 % downsampling visual data (if necessary)
 if strcmp(DATA_TYPE, 'ONI')
-%     timeList_IMG = timeList_IMG(1:5:end);
-%     imgList = imgList(1:5:end);
-%     depList = depList(1:5:end);
+    SKIP = 1; %30Hz (original)
+    %SKIP = 2; %15Hz
+    %SKIP = 3; %10Hz
+    %SKIP = 6; %5Hz
+    %SKIP = 30; %1Hz
+    
+    timeList_IMG = timeList_IMG(1:SKIP:end);
+    imgList = imgList(1:SKIP:end);
+    depList = depList(1:SKIP:end);
 end
 
 % TODO: this resets IMU's reading to zero
