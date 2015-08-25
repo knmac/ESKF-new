@@ -1,7 +1,7 @@
 close all; clearvars; clc;
 SetupEnv
 SetupExperiment
-load('exp22-room3turns');
+load('exp16-room1turn');
 
 %% Read data and initialize
 len = size(all_states, 2);

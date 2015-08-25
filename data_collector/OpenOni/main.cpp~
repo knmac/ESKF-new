@@ -1,0 +1,58 @@
+#include "OpenNI.h"
+#include "Device.h"
+#include "XnLib.h"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <iostream>
+
+using namespace cv;
+using namespace openni;
+using namespace std;
+
+int main(int argc, char **argv){
+    //all variables needed
+    openni::Device device_;         
+    openni::VideoStream ir_;      
+    openni::VideoStream color_;    
+    openni::Status rc_ = STATUS_OK;
+    openni::VideoFrameRef irf_;
+    openni::VideoFrameRef colorf_;
+    openni::PlaybackControl* playback_;
+
+    openni::OpenNI::initialize (); 
+    const char *cstr = "Captured.oni";
+    device_.open(cstr);
+    
+    ir_.create(device_, openni::SENSOR_DEPTH);
+    ir_.start();
+    
+    //device_.setImageRegistrationMode (openni::IMAGE_REGISTRATION_DEPTH_TO_COLOR);
+    color_.create(device_, openni::SENSOR_COLOR);
+    color_.start();
+    
+    //ir_.readFrame(&irf_);
+    //color_.readFrame (&colorf_);
+    
+    playback_ = device_.getPlaybackControl();
+    int frameNumber = playback_->getNumberOfFrames(color_);
+    cout << frameNumber << endl;
+    
+    Mat frame;
+    for (int i = 0; i < frameNumber; i++)
+    {
+        rc_ = color_.readFrame (&colorf_);
+        if (rc_ != STATUS_OK)
+        {
+            break;
+        }
+        const openni::RGB888Pixel* imageBuffer = (const openni::RGB888Pixel*)colorf_.getData();
+
+        frame.create(colorf_.getHeight(), colorf_.getWidth(), CV_8UC3);
+        memcpy( frame.data, imageBuffer, 3*colorf_.getHeight()*colorf_.getWidth()*sizeof(uint8_t) );
+
+        cv::cvtColor(frame, frame, CV_BGR2RGB); //this will put colors right
+        imwrite("color.jpg", frame);
+    }
+    
+    return 0;
+}

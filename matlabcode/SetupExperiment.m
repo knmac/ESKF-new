@@ -1,4 +1,4 @@
-OPT = 22;
+OPT = 16;
 
 switch OPT
     case 1 % ros - stand
@@ -156,7 +156,7 @@ switch OPT
         TIME_DIFF = 0;
         DATA_TYPE = 'ONI';
         CAM_RES = '320x240';
-    case 23 % room - 5 turns
+    case 23 % room - 6 turns
         dataLocation = '../data/Data23/';
         imuFile = strcat(dataLocation, 'sensor_data_5turns.txt');
         visionLocation = strcat(dataLocation, 'RGBD/');

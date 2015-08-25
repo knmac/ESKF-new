@@ -1,10 +1,10 @@
 %% The main file of the project
 clearvars; close all; clc;
-tic
 SetupEnv
 SetupExperiment
 
 %% Calibrate IMU sensor
+disp 'Initializing...'
 if ~isempty(IMU_CAL_FILE) && exist(IMU_CAL_FILE, 'file')
     load(IMU_CAL_FILE);
 else
@@ -69,6 +69,7 @@ nbIMG = length(timeList_IMG);
 
 all_states = x_I;
 correct_mark = 0;
+tic
 while ixIMU < nbIMU && ixIMG < nbIMG
     %======================================================================
     % Error-State Kalman Filter
